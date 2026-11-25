@@ -25,12 +25,13 @@
         <a href="/?case=retry" id="retry-link">Payment retry</a>
         <a href="/?case=refund" id="refund-link">Show cancellation</a>
       </nav>
-      <label class="build-control" for="build">Build
+      <div class="build-control">
+        <label for="build">Build</label>
         <select id="build" disabled>
           <option value="after">Repaired build</option>
           <option value="before">Original build with bugs</option>
         </select>
-      </label>
+      </div>
     </div>
     <p class="fixture-note" id="fixture-note" hidden>Running the original build with intentional bugs for this rehearsal.</p>
     <div class="workbench">
