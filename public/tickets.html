@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="A ticketing sandbox that verifies payment retries and cancellation refunds with Kane CLI.">
   <title>Ticket Check · Payments Sandbox</title>
+  <link rel="preload" href="/ticket-terminal.webp" as="image">
   <link rel="stylesheet" href="/tickets.css">
   <script src="/tickets.js" defer></script>
 </head>
@@ -15,11 +16,17 @@
       <a class="report-link" href="#evidence-title">Kane evidence</a>
     </div>
   </header>
-  <main class="frame">
-    <section class="intro">
-      <h1>Ticket payments</h1>
-      <p>Rehearse two payment failures before tickets go on sale.</p>
+  <main>
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="hero-photo" aria-hidden="true"></div>
+      <div class="frame intro-content">
+        <p class="intro-label">Payments sandbox</p>
+        <h1 id="intro-title">Ticket payments</h1>
+        <p>See what happens in the ledger when a payment is retried or a show is cancelled.</p>
+        <a class="hero-action" href="#scenarios">Explore the scenarios</a>
+      </div>
     </section>
+    <div class="frame workspace" id="scenarios" tabindex="-1">
     <div class="toolbar">
       <nav class="scenarios" aria-label="Payment scenarios">
         <a href="/?case=retry" id="retry-link">Payment retry</a>
@@ -69,6 +76,7 @@
       <div id="reports" class="reports"></div>
     </section>
     <footer>Sample event · Simulated payments</footer>
+    </div>
   </main>
 </body>
 </html>

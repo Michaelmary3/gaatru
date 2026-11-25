@@ -8,6 +8,7 @@ const assets = new Map([
   ["/", ["tickets.html", "text/html"]],
   ["/tickets.css", ["tickets.css", "text/css"]],
   ["/tickets.js", ["tickets.js", "text/javascript"]],
+  ["/ticket-terminal.webp", ["ticket-terminal.webp", "image/webp"]],
 ]);
 
 function json(res, status, data) {
@@ -52,7 +53,8 @@ export async function startTicketServer({port = 0, onActivity = () => {}, demons
       if (!asset) return res.writeHead(404).end();
       const [file, mime] = asset;
       const content = await readFile(new URL("../public/" + file, import.meta.url));
-      res.writeHead(200, {"Content-Type": mime + "; charset=utf-8", "Cache-Control": "no-store"}).end(content);
+      const contentType = mime.startsWith("image/") ? mime : mime + "; charset=utf-8";
+      res.writeHead(200, {"Content-Type": contentType, "Cache-Control": "no-store"}).end(content);
     } catch {
       json(res, 500, {error: "Sandbox request failed"});
     }
