@@ -19,6 +19,8 @@ The **Kane CLI runs** panel reads JSON from the recorded runs. The retry verdict
 | Payment retry | Two captures totaling $150.00. [Before report](evidence/ticket-retry-before-1795629792137/result.json) | One capture totaling $75.00. [After report](evidence/ticket-retry-after-1795630018714/result.json) |
 | Show cancellation | $75.00 buyer refund, $0.00 recovered, $75.00 platform cost. [Before report](evidence/ticket-refund-before-1795630318426/result.json) | $75.00 buyer refund, $75.00 recovered, $0.00 platform cost. [After report](evidence/ticket-refund-after-1795630448641/result.json) |
 
+The redesigned interface passed both unchanged objectives in a fresh run. [Payment retry](evidence/ticket-retry-check-1795632125233/result.json) · [Show cancellation](evidence/ticket-refund-check-1795632243716/result.json)
+
 ## Shot list for a three-minute recording
 
 | Time | Record on screen | Say |

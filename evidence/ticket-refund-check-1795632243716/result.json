@@ -1,0 +1,69 @@
+{
+  "check": {
+    "expected": {
+      "Buyer refund": "$75.00",
+      "Organizer funds recovered": "$75.00",
+      "Platform refund cost": "$0.00"
+    },
+    "observed": {
+      "Buyer refund": "$75.00",
+      "Organizer funds recovered": "$75.00",
+      "Platform refund cost": "$0.00"
+    },
+    "browserObserved": {
+      "Buyer refund": "$75.00",
+      "Organizer funds recovered": "$75.00",
+      "Platform refund cost": "$0.00"
+    }
+  },
+  "exitCode": 0,
+  "verdict": "passed",
+  "summary": "You asked to cancel the show and refund the ticket, then review its payment activity.\nThe show was canceled and the organizer console showed the ticket as Refunded.\nPayment activity was opened and the ledger showed a Buyer refund of $75.00, Organizer funds recovered of $75.00, and Platform refund cost of $0.00.",
+  "reason": "Objective completed",
+  "findings": [],
+  "steps": [
+    {
+      "step": 2,
+      "status": "done",
+      "remark": "navigate: Navigate to http://127.0.0.1/?case=refund"
+    },
+    {
+      "step": 3,
+      "status": "done",
+      "remark": "click: Clicking Cancel show and refund ticket"
+    },
+    {
+      "step": 4,
+      "status": "done",
+      "remark": "analyze: Refunded is visible in the organizer console."
+    },
+    {
+      "step": 5,
+      "status": "done",
+      "remark": "assert: Refunded is visible in the organizer console."
+    },
+    {
+      "step": 6,
+      "status": "done",
+      "remark": "click: Clicking Payment activity button"
+    },
+    {
+      "step": 7,
+      "status": "done",
+      "remark": "analyze: ANALYZE(textual_visual, 'Get the current value of Platform refund cost from its "
+    },
+    {
+      "step": 8,
+      "status": "done",
+      "remark": "wait: Waiting after completing all refund ledger extractions"
+    }
+  ],
+  "kaneVerdict": "passed",
+  "kaneReasonCode": "success.complete",
+  "kaneFinding": "canceled a show, refunded a ticket, and reviewed payment activity on the organizer console",
+  "verification": "Kane browser observations reconciled against the sandbox ledger",
+  "objectiveSha256": "6d2fefbd7db9c00e1690ca3dde4493e457970ee3b4c8d97911228263782ede20",
+  "recordedAt": "2026-11-25T18:45:37.299Z",
+  "kaneVersion": "0.10.9",
+  "intentionalFixture": false
+}

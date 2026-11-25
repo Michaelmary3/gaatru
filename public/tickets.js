@@ -134,8 +134,10 @@ async function refreshReports() {
     const response = await fetch("/api/ticket-runs");
     if (!response.ok) throw new Error("Reports unavailable");
     const {runs} = await response.json();
-    status.textContent = runs.length ? "Recorded browser runs and ledger observations" : "No recorded Kane runs yet.";
-    byId("reports").replaceChildren(...runs.map((run) => {
+    const verified = runs.filter((run) => run.verdict === "passed" || run.verdict === "failed");
+    const incomplete = runs.filter((run) => run.verdict !== "passed" && run.verdict !== "failed");
+    status.textContent = verified.length ? "Recorded browser runs and ledger observations" : "No complete Kane runs yet.";
+    const render = (run) => {
       const details = document.createElement("details");
       const heading = document.createElement("summary");
       heading.textContent = run.label.replace(/^ticket /, "").replace(/^retry/, "Payment retry")
@@ -171,7 +173,16 @@ async function refreshReports() {
         details.append(line);
       }
       return details;
-    }));
+    };
+    const reports = byId("reports");
+    reports.replaceChildren(...verified.map(render));
+    if (incomplete.length) {
+      const diagnostics = document.createElement("details");
+      const heading = document.createElement("summary");
+      heading.textContent = "Incomplete attempts (" + incomplete.length + ")";
+      diagnostics.append(heading, ...incomplete.map(render));
+      reports.append(diagnostics);
+    }
   } catch {
     status.textContent = "Could not load local Kane reports.";
   }
