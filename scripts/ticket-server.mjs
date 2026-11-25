@@ -69,5 +69,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const args = process.argv.slice(2);
   const requestedPort = Number(args.find((arg) => !arg.startsWith("--")) ?? "4174");
   const server = await startTicketServer({port: requestedPort, demonstrateRegressions: args.includes("--fixture")});
-  console.log("Ticket Check is listening on http://127.0.0.1:" + server.address().port);
+  console.log("gaatru is listening on http://127.0.0.1:" + server.address().port);
 }

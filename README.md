@@ -1,6 +1,6 @@
-# Ticket Check
+# gaatru
 
-Ticket Check is a local release gate for ticketing checkout and cancellation. It exercises both workflows in Chrome with Kane CLI and checks the amounts in the sandbox ledger.
+gaatru is a local release gate for ticketing checkout and cancellation. It exercises both workflows in Chrome with Kane CLI and checks the amounts in the sandbox ledger.
 
 - **Payment retry.** The provider records a payment, but the response never reaches checkout. Retrying the same purchase must leave exactly one captured charge of $75.
 - **Show cancellation.** The buyer gets a $75 refund after the original proceeds were sent to the organizer. Under this sandbox's cancellation policy, the organizer's original transfer is reversed and the platform's unrecovered refund cost is $0.

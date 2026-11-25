@@ -1,6 +1,12 @@
-# Ticket Check · Demo notes
+# gaatru · Demo notes
 
-Ticket Check is a release check for two ticketing failures that look successful on screen. A fan can receive a confirmation after being charged twice. A refunded order can leave the ticketing platform covering the refund because the organizer's transfer was never reversed. The sandbox uses a sample $75 ticket and a simulated provider ledger.
+gaatru is a release check for two ticketing failures that look successful on screen. A fan can receive a confirmation after being charged twice. A refunded order can leave the ticketing platform covering the refund because the organizer's transfer was never reversed. The sandbox uses a sample $75 ticket and a simulated provider ledger.
+
+## Real-world context for the video
+
+- Stripe reports that businesses on its platform processed more than $40 billion across more than 578 million transactions during Black Friday through Cyber Monday 2025. This is overall payment volume. [Stripe's 2025 payment figures](https://stripe.com/newsroom/news/bfcm2025)
+- Checkout.com documented an October 2026 incident where some direct debits looked failed after funds had been collected. Duplicate charges occurred when some merchants retried the payments. [Checkout.com incident notice](https://support.checkout.com/hc/en-us/articles/41050684333458-Why-was-I-charged-twice-for-a-SEPA-Direct-Debit-payment-that-showed-as-failed)
+- Stripe documents that the platform can fund a destination-charge refund while the connected account keeps its transfer unless the integration requests a reversal. [Stripe Connect refunds](https://docs.stripe.com/connect/destination-charges?platform=web&ui=elements#issue-refunds)
 
 ## Record the demo
 
