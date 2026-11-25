@@ -1,0 +1,82 @@
+{
+  "check": {
+    "expected": {
+      "Captured charges": 1,
+      "Total captured": "$75.00"
+    },
+    "observed": {
+      "Captured charges": 2,
+      "Total captured": "$150.00"
+    }
+  },
+  "exitCode": 1,
+  "verdict": "failed",
+  "summary": "The first payment was captured even though its confirmation timed out. Retrying the payment captured another $75 instead of recognizing the earlier captured payment.\nMake payment retries safe to repeat: preserve the original payment result after a timeout and prevent a retry from creating another capture for the same ticket.\nevidence: objective_contradiction: check FAILED: Captured charges is exactly 1 — expected: 1 | observed: {{captured_charges_exactly_1}}\nevidence: objective_contradiction: check FAILED: Total captured is exactly $75.00 — expected: $75.00 | observed: {{total_captured_exactly_75_00}}",
+  "reason": "Checkpoint assertion failed: \"Captured charges is exactly 1 and Total captured is exactly $75.00\"",
+  "findings": [
+    {
+      "step": 11,
+      "remark": "assert: Captured charges is exactly 1 and Total captured is exactly $75.00",
+      "status": "failed"
+    }
+  ],
+  "steps": [
+    {
+      "step": 2,
+      "remark": "navigate: Navigate to http://127.0.0.1/?case=retry",
+      "status": "done"
+    },
+    {
+      "step": 3,
+      "remark": "click: Clicking Pay $75 in the buy a ticket panel",
+      "status": "done"
+    },
+    {
+      "step": 4,
+      "remark": "analyze: the checkout says Payment confirmation timed out",
+      "status": "done"
+    },
+    {
+      "step": 5,
+      "remark": "assert: the checkout says Payment confirmation timed out",
+      "status": "done"
+    },
+    {
+      "step": 6,
+      "remark": "click: Clicking Retry payment",
+      "status": "done"
+    },
+    {
+      "step": 7,
+      "remark": "analyze: Ticket confirmed appears",
+      "status": "done"
+    },
+    {
+      "step": 8,
+      "remark": "assert: Ticket confirmed appears",
+      "status": "done"
+    },
+    {
+      "step": 9,
+      "remark": "click: Clicking Payment activity in Buy a ticket panel",
+      "status": "done"
+    },
+    {
+      "step": 10,
+      "remark": "analyze: Total captured is exactly $75.00",
+      "status": "done"
+    },
+    {
+      "step": 11,
+      "remark": "assert: Captured charges is exactly 1 and Total captured is exactly $75.00",
+      "status": "failed"
+    }
+  ],
+  "kaneVerdict": "failed",
+  "objectiveSha256": "30284a3b76079f428a2911f03fcecb7010d2a4e50c4dd5bbbc1401e41137dc23",
+  "kaneReasonCode": "assertion_error.confirmed_product_bug",
+  "kaneFinding": "The ticket was charged twice: captured_charges was 2 and total_captured was $150.00, rather than 1 and $75.00.",
+  "recordedAt": "2026-11-25T18:06:01.700Z",
+  "kaneVersion": "0.10.9",
+  "intentionalFixture": true
+}

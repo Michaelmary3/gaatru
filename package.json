@@ -1,0 +1,20 @@
+{
+  "name": "form-survival",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node scripts/ticket-server.mjs",
+    "start:bakery": "node scripts/server.mjs",
+    "verify": "node scripts/verify.mjs",
+    "check:browser": "node scripts/browser-check.mjs",
+    "check:tickets": "node scripts/ticket-browser-check.mjs"
+  },
+  "devDependencies": {
+    "@testmuai/kane-cli": "0.10.9",
+    "playwright": "1.65.1"
+  }
+}

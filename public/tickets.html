@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A ticketing sandbox that verifies payment retries and cancellation refunds with Kane CLI.">
+  <title>Ticket Check · Payments Sandbox</title>
+  <link rel="stylesheet" href="/tickets.css">
+  <script src="/tickets.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="frame brand">
+      <a href="/"><span class="brand-mark" aria-hidden="true">TC</span>Ticket Check</a>
+      <a class="report-link" href="#evidence-title">Kane evidence</a>
+    </div>
+  </header>
+  <main class="frame">
+    <section class="intro">
+      <h1>Ticket payments</h1>
+      <p>Rehearse two payment failures before tickets go on sale.</p>
+    </section>
+    <div class="toolbar">
+      <nav class="scenarios" aria-label="Payment scenarios">
+        <a href="/?case=retry" id="retry-link">Payment retry</a>
+        <a href="/?case=refund" id="refund-link">Show cancellation</a>
+      </nav>
+      <label class="build-control" for="build">Build
+        <select id="build" disabled>
+          <option value="after">Repaired build</option>
+          <option value="before">Original build with bugs</option>
+        </select>
+      </label>
+    </div>
+    <p class="fixture-note" id="fixture-note" hidden>Running the original build with intentional bugs for this rehearsal.</p>
+    <div class="workbench">
+      <section class="card" aria-labelledby="scenario-title">
+        <p class="eyebrow" id="view-label">Fan checkout</p>
+        <h2 id="scenario-title">Buy a ticket</h2>
+        <div class="ticket">
+          <div><strong>After Hours Live</strong><span>General admission · 1 ticket</span></div>
+          <strong class="price">$75.00</strong>
+        </div>
+        <p id="scenario-note"></p>
+        <p id="status" class="status" role="status"></p>
+        <div class="actions">
+          <button id="action" disabled>Pay $75</button>
+          <button id="activity" class="secondary" type="button" hidden>Payment activity</button>
+          <button id="reset" class="secondary" type="button">Start over</button>
+        </div>
+      </section>
+      <section class="card ledger" aria-labelledby="ledger-title">
+        <h2 id="ledger-title" tabindex="-1">Payment activity</h2>
+        <p id="ledger-hint">Complete the action, then open Payment activity to see the records for this order.</p>
+        <div id="ledger-data" hidden>
+          <p class="order-id" id="order-id"></p>
+          <dl id="metrics"></dl>
+          <ol class="entries" id="entries" aria-label="Ledger entries"></ol>
+        </div>
+      </section>
+    </div>
+    <section class="card evidence" aria-labelledby="evidence-title">
+      <div>
+        <h2 id="evidence-title">Kane CLI runs</h2>
+        <p id="evidence-status" role="status">Reading local reports…</p>
+      </div>
+      <button type="button" id="refresh" class="secondary">Refresh reports</button>
+      <div id="reports" class="reports"></div>
+    </section>
+    <footer>Sample event · Simulated payments</footer>
+  </main>
+</body>
+</html>

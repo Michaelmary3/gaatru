@@ -1,0 +1,69 @@
+{
+  "check": {
+    "expected": {
+      "Buyer refund": "$75.00",
+      "Organizer funds recovered": "$75.00",
+      "Platform refund cost": "$0.00"
+    },
+    "observed": {
+      "Buyer refund": "$75.00",
+      "Organizer funds recovered": "$0.00",
+      "Platform refund cost": "$75.00"
+    },
+    "browserObserved": {
+      "Buyer refund": "$75.00",
+      "Organizer funds recovered": "$0.00",
+      "Platform refund cost": "$75.00"
+    }
+  },
+  "exitCode": 0,
+  "verdict": "failed",
+  "summary": "You asked to cancel the show and refund the ticket, then review payment activity.\nThe show was canceled and the organizer console displayed a Refunded status.\nPayment activity was opened and the ledger showed a Buyer refund of $75.00, Organizer funds recovered of $0.00, and Platform refund cost of $75.00.",
+  "reason": "The amounts read by Kane matched the sandbox ledger and violated the cancellation policy.",
+  "findings": [],
+  "steps": [
+    {
+      "step": 2,
+      "remark": "navigate: Navigate to http://127.0.0.1/?case=refund",
+      "status": "done"
+    },
+    {
+      "step": 3,
+      "remark": "click: Clicking Cancel show and refund ticket button",
+      "status": "done"
+    },
+    {
+      "step": 4,
+      "remark": "analyze: Refunded is visible in the organizer console.",
+      "status": "done"
+    },
+    {
+      "step": 5,
+      "remark": "assert: Refunded is visible in the organizer console.",
+      "status": "done"
+    },
+    {
+      "step": 6,
+      "remark": "click: Clicking the Payment activity button",
+      "status": "done"
+    },
+    {
+      "step": 7,
+      "remark": "analyze: ANALYZE(textual_visual, 'Get the current value of Platform refund cost from its ",
+      "status": "done"
+    },
+    {
+      "step": 8,
+      "remark": "wait: Waiting after confirming refund status and Payment activity ledger values",
+      "status": "done"
+    }
+  ],
+  "kaneVerdict": "passed",
+  "kaneReasonCode": "success.complete",
+  "kaneFinding": "canceled the show, refunded the ticket, and reviewed payment activity on the organizer console",
+  "verification": "Kane browser observations reconciled against the sandbox ledger",
+  "objectiveSha256": "6d2fefbd7db9c00e1690ca3dde4493e457970ee3b4c8d97911228263782ede20",
+  "recordedAt": "2026-11-25T18:13:30.988Z",
+  "kaneVersion": "0.10.9",
+  "intentionalFixture": true
+}

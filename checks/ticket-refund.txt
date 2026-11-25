@@ -1,0 +1,6 @@
+Click the Cancel show and refund ticket button.
+Verify that Refunded is visible in the organizer console.
+Click the Payment activity button.
+Get the current value of Buyer refund from its labeled row in the ledger and save it as buyer_refund.
+Get the current value of Organizer funds recovered from its labeled row in the ledger and save it as organizer_funds_recovered.
+Get the current value of Platform refund cost from its labeled row in the ledger and save it as platform_refund_cost.
