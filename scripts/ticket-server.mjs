@@ -22,7 +22,7 @@ export async function startTicketServer({port = 0, onActivity = () => {}, demons
     const {pathname, searchParams} = new URL(req.url, "http://localhost");
     try {
       if (req.method === "GET" && pathname === "/api/ticket-runs") {
-        const runs = await recentKaneRuns({tickets: true});
+        const runs = await recentKaneRuns();
         return json(res, 200, {runs});
       }
       if (req.method === "POST" && pathname.startsWith("/api/tickets/")) {

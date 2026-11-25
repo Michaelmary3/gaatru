@@ -1,7 +1,7 @@
 import { readdir, readFile } from "node:fs/promises";
 
-export const projectRoot = new URL("../", import.meta.url);
-export const reportsRoot = new URL("reports/", projectRoot);
+const projectRoot = new URL("../", import.meta.url);
+const reportsRoot = new URL("reports/", projectRoot);
 const evidenceRoot = new URL("evidence/", projectRoot);
 
 async function runDirectories(root) {
@@ -12,13 +12,12 @@ async function runDirectories(root) {
   return entries.filter((entry) => entry.isDirectory()).map((entry) => [entry.name, root]);
 }
 
-export async function recentKaneRuns({tickets = false} = {}) {
-  const archived = tickets ? await runDirectories(evidenceRoot) : [];
+export async function recentKaneRuns() {
+  const archived = await runDirectories(evidenceRoot);
   const local = await runDirectories(reportsRoot);
   const locations = new Map([...local, ...archived]);
   const names = [...locations.keys()]
-    .filter((name) => (tickets ? /^ticket-(?:retry|refund)-(?:before|after|check)-\d+$/
-      : /^(?:(?:back|offline|stale)-(?:before|fixed)|custom)-\d+$/).test(name))
+    .filter((name) => /^ticket-(?:retry|refund)-(?:before|after|check)-\d+$/.test(name))
     .sort((a, b) => b.slice(b.lastIndexOf("-") + 1).localeCompare(a.slice(a.lastIndexOf("-") + 1)))
     .slice(0, 12);
   const rows = await Promise.all(names.map(async (name) => {

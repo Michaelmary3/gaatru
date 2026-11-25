@@ -1,46 +1,28 @@
 # gaatru
 
-gaatru is a local release gate for ticketing checkout and cancellation. It exercises both workflows in Chrome with Kane CLI and checks the amounts in the sandbox ledger.
+A local release check for duplicate ticket charges and refunds paid from the wrong balance. The sandbox uses simulated payments.
 
-- **Payment retry.** The provider records a payment, but the response never reaches checkout. Retrying the same purchase must leave exactly one captured charge of $75.
-- **Show cancellation.** The buyer gets a $75 refund after the original proceeds were sent to the organizer. Under this sandbox's cancellation policy, the organizer's original transfer is reversed and the platform's unrecovered refund cost is $0.
+## Run locally
 
-The After Hours Live show, charges, balances, and fault conditions are sample data. The sandbox uses a local ledger with no external payment provider and omits fees.
+With Node.js 22+ and Chrome:
 
-## Open the sandbox
-
-Use Node.js 22 or newer and Chrome.
-
-```powershell
-npm.cmd ci
-npm.cmd start
+```sh
+npm ci
+npm start
 ```
 
-Open http://127.0.0.1:4174 and select a scenario. Choose **Repaired build** or **Original build with bugs** to compare the two versions. After completing it, open **Payment activity** to see the ledger. **Start over** creates a fresh order.
+Open [localhost:4174](http://127.0.0.1:4174). Pick a scenario and use **Build** to switch between the original bug and the repair. Open **Payment activity** to see the ledger.
 
-## Run the release checks
+| Check | Original fixture | Repaired |
+| --- | --- | --- |
+| Retry a $75 payment after a timeout | [Two charges, $150](evidence/ticket-retry-before-1795629792137/result.json) | [One charge, $75](evidence/ticket-retry-after-1795630018714/result.json) |
+| Refund a cancelled show after transferring the proceeds | [$75 platform cost](evidence/ticket-refund-before-1795630318426/result.json) | [$0 platform cost](evidence/ticket-refund-after-1795630448641/result.json) |
 
-Sign in to Kane on the machine that runs Chrome.
+## Run Kane
 
-```powershell
-npx.cmd kane-cli login --oauth
-npm.cmd run verify -- ticket all --headed
+```sh
+npx kane-cli login --oauth
+npm run verify -- ticket all --headed
 ```
 
-You can run either objective independently by replacing `all` with `retry` or `refund`. The process returns a nonzero exit code if either check fails or cannot be verified. It starts a fresh loopback server for each check. Each result includes the objective hash and expected and observed ledger values. The raw browser events and generated failure handoff are under `reports/ticket-*/`. The **Kane CLI runs** panel shows those results and the shareable report snapshots under `evidence/`.
-
-To replay the two intentional regressions, run `npm.cmd run verify -- ticket all before --headed`. That command should exit with failures. The ordinary command exercises the repaired code with the same objectives. To explore the regressions manually in Chrome, start the sandbox with `npm.cmd start -- --fixture`.
-
-The retry check uses Kane's browser assertion and confirms the result against the ledger. For the cancellation check, Kane opens Payment activity and reads all three amounts. The runner verifies that those browser values match the sandbox ledger, then compares them with the refund policy. An authentication failure, incomplete browser run, or contradictory evidence never passes the gate.
-
-The separate Chrome smoke test also exercises refresh between the first payment attempt and the retry.
-
-```powershell
-npm.cmd run check:tickets
-```
-
-## Why these checks
-
-[WooCommerce documents duplicate-charge risk after an uncertain timeout](https://github.com/woocommerce/woocommerce/blob/trunk/docs/features/payments/payment-gateway-api.md#retries-and-uncertain-outcomes). [Stripe documents how the funding side of a destination-charge refund can stay unreconciled without a transfer reversal](https://docs.stripe.com/connect/destination-charges?platform=web&ui=elements#issue-refunds).
-
-The previous bakery prototype remains available via `npm.cmd run start:bakery` on port 4173. Its separate smoke suite is `npm.cmd run check:browser`.
+Add `before` after `all` to replay the failures. Both builds use the same [objectives](checks/). Kane checks the retry in Chrome. For cancellations, gaatru compares Kane’s browser readings with the ledger. Results and Codex handoffs are saved in `reports/`. Run `npm run check:tickets` for the browser smoke tests.

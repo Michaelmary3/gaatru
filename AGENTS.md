@@ -1,9 +1,7 @@
-# Form Survival verification
+# Repository checks
 
-When modifying the form, read the applicable objective under checks/. Use the built-in fixtures or an explicitly authorized test instance with sample data.
+Read the relevant objective under `checks/` and use only sample data in the sandbox. Before fixing a reported problem, run Kane and read its result, events, or handoff in `reports/`. An incomplete run or login failure is inconclusive.
 
-Run the relevant Kane objective before changing code when reproducing a problem. Read its reports/<run>/result.json, events.ndjson, or codex-handoff.md directly. Confirm the failed step reflects a product error before changing the app. Login errors, incomplete tests, and an unverified verdict do not establish a product failure.
+Keep the objective and expected amounts intact. Make the smallest warranted fix, rerun the same objective, and inspect the result. Use `npm run check:tickets` for the separate Chrome smoke tests.
 
-Make the smallest application change warranted by the evidence. Keep the objective and expected values intact. Run the same objective on the corrected app and inspect the new report. For example, use npm run verify -- fixed stale for the default form or use the custom command twice with one unchanged objective and suitable authorized fixtures. If Kane cannot run, report the blocker. npm run check:browser can verify the separate browser smoke cases.
-
-Use recorded Kane output in the submission. Label intentional fixture bugs as such. Do not attach private data or credentials to the public repo.
+Label intentional fixture failures in public evidence. Keep credentials and private data out of the repo.

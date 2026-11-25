@@ -7,7 +7,7 @@ const action = byId("action");
 const activity = byId("activity");
 const reset = byId("reset");
 const buildControl = byId("build");
-const storageKey = "ticket-check:" + scenario + ":" + (build ?? "default");
+const storageKey = "gaatru:" + scenario + ":" + (build ?? "default");
 const dollars = new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"});
 let order;
 let phase;

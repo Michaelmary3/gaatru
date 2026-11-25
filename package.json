@@ -8,9 +8,7 @@
   },
   "scripts": {
     "start": "node scripts/ticket-server.mjs",
-    "start:bakery": "node scripts/server.mjs",
     "verify": "node scripts/verify.mjs",
-    "check:browser": "node scripts/browser-check.mjs",
     "check:tickets": "node scripts/ticket-browser-check.mjs"
   },
   "devDependencies": {
